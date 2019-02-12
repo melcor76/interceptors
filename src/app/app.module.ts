@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { RetryInterceptor } from './interceptors/retry.interceptor';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RetryInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
