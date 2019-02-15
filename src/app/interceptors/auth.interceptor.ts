@@ -19,9 +19,12 @@ export class AuthInterceptor implements HttpInterceptor {
   );
 
   intercept(
-    req: HttpRequest<any>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    if (!request.url.includes('auth')) {
+      return next.handle(request);
+    }
     /*if (!req.headers.has('Content-Type')) {
       req = req.clone({
         headers: req.headers.set('Content-Type', 'application/json')
@@ -30,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     //req = this.addAuthenticationToken(req);
 
-    return next.handle(req).pipe(
+    return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error && error.status === 401) {
           // 401 errors are most likely going to be because we have an expired token that we need to refresh.
@@ -40,7 +43,7 @@ export class AuthInterceptor implements HttpInterceptor {
             return this.refreshTokenSubject.pipe(
               filter(result => result !== null),
               take(1),
-              switchMap(() => next.handle(this.addAuthenticationToken(req)))
+              switchMap(() => next.handle(this.addAuthenticationToken(request)))
             );
           } else {
             this.refreshTokenInProgress = true;
@@ -55,7 +58,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 this.refreshTokenInProgress = false;
                 this.refreshTokenSubject.next(success);
 
-                return next.handle(this.addAuthenticationToken(req));
+                return next.handle(this.addAuthenticationToken(request));
               }),
               catchError((err: any) => {
                 this.refreshTokenInProgress = false;

@@ -10,7 +10,23 @@ export class AppComponent {
 
   constructor(private http: HttpClient) {}
 
-  callApi() {
-    this.http.get('url').subscribe();
+  auth() {
+    this.http.get('auth').subscribe();
+  }
+
+  cache() {
+    this.http.get('cache').subscribe();
+  }
+
+  error() {
+    this.http.get('error').subscribe();
+  }
+
+  header() {
+    this.http.get('header').subscribe();
+  }
+
+  retry() {
+    this.http.get('retry').subscribe();
   }
 }

@@ -17,6 +17,10 @@ export class CacheInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    if (!request.url.includes('cache')) {
+      return next.handle(request);
+    }
+
     if (request.method !== 'GET') {
       return next.handle(request);
     }
