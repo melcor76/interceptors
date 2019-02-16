@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
   HttpErrorResponse
-} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -17,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes('error')) {
+    if (!request.url.includes("error")) {
       return next.handle(request);
     }
 
