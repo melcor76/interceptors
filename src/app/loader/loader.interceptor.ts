@@ -1,13 +1,13 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { LoaderService } from '../loader.service';
+} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
+import { LoaderService } from "./loader.service";
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -16,9 +16,10 @@ export class LoaderInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes('loader')) {
+    if (!request.url.includes("loader")) {
       return next.handle(request);
     }
+    console.log("LoaderInterceptor");
 
     const loaderService = this.injector.get(LoaderService);
 

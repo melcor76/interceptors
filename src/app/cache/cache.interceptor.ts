@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
   HttpResponse
-} from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap, shareReplay } from 'rxjs/operators';
+} from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { tap } from "rxjs/operators";
 
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
@@ -17,11 +17,12 @@ export class CacheInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes('cache')) {
+    if (!request.url.includes("cache")) {
       return next.handle(request);
     }
+    console.log("CacheInterceptor");
 
-    if (request.method !== 'GET') {
+    if (request.method !== "GET") {
       return next.handle(request);
     }
 

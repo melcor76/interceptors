@@ -20,6 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     if (!request.url.includes("error")) {
       return next.handle(request);
     }
+    console.log("ErrorInterceptor");
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {

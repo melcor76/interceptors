@@ -6,22 +6,18 @@ import {
   HttpInterceptor
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
 
 @Injectable()
-export class ProfilerInterceptor implements HttpInterceptor {
+export class FakeInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes("profiler")) {
+    if (!request.url.includes("fake")) {
       return next.handle(request);
     }
+    console.log("FakeInterceptor");
 
-    return next.handle(request).pipe(
-      tap(() => {
-        console.log("profiler");
-      })
-    );
+    return next.handle(request);
   }
 }

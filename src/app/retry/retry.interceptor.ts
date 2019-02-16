@@ -6,18 +6,19 @@ import {
   HttpInterceptor
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { retry } from "rxjs/operators";
 
 @Injectable()
-export class FakeBackendInterceptor implements HttpInterceptor {
+export class RetryInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes("fake")) {
+    if (!request.url.includes("retry")) {
       return next.handle(request);
     }
+    console.log("RetryInterceptor");
 
-    return next.handle(request).pipe(tap(() => console.log("fake")));
+    return next.handle(request).pipe(retry(2));
   }
 }

@@ -10,7 +10,7 @@ import { map } from "rxjs/operators";
 import { camelCase, mapKeys } from "lodash";
 
 @Injectable()
-export class CamelCaseInterceptor implements HttpInterceptor {
+export class CamelInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -18,6 +18,7 @@ export class CamelCaseInterceptor implements HttpInterceptor {
     if (!request.url.includes("camel")) {
       return next.handle(request);
     }
+    console.log("CamelInterceptor");
 
     return next.handle(request).pipe(
       map(obj => {
