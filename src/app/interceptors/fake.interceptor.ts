@@ -10,14 +10,14 @@ import { Observable } from "rxjs";
 @Injectable()
 export class FakeInterceptor implements HttpInterceptor {
   intercept(
-    request: HttpRequest<any>,
+    req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes("fake")) {
-      return next.handle(request);
+    if (!req.url.includes("fake")) {
+      return next.handle(req);
     }
     console.log("FakeInterceptor");
 
-    return next.handle(request);
+    return next.handle(req);
   }
 }

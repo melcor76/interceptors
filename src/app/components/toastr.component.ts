@@ -3,13 +3,14 @@ import { HttpClient } from "@angular/common/http";
 
 @Component({
   template: `
+    Toastr
     <button (click)="run()">Run</button>
   `
 })
-export class ProfilerComponent {
+export class ToastrComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("profiler").subscribe();
+    this.http.get("toastr").subscribe();
   }
 }

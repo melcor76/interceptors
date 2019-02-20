@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { LoaderService } from "./loader.service";
+import { LoaderService } from "../loader.service";
 
 @Component({
   styleUrls: ["loader.component.css"],
   template: `
+    Loader
     <button (click)="run()" [disabled]="loaderService.showLoader">Run</button>
     <div *ngIf="loaderService.showLoader" class="loader"></div>
   `

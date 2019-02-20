@@ -3,13 +3,14 @@ import { HttpClient } from "@angular/common/http";
 
 @Component({
   template: `
+    Cache
     <button (click)="run()">Run</button>
   `
 })
-export class RetryComponent {
+export class CacheComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("retry").subscribe();
+    this.http.get("cache").subscribe();
   }
 }

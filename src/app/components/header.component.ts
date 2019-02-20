@@ -3,13 +3,14 @@ import { HttpClient } from "@angular/common/http";
 
 @Component({
   template: `
+    Header
     <button (click)="run()">Run</button>
   `
 })
-export class AuthComponent {
+export class HeaderComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("auth").subscribe();
+    this.http.get("header").subscribe();
   }
 }

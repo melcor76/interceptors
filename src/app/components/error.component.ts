@@ -3,13 +3,14 @@ import { HttpClient } from "@angular/common/http";
 
 @Component({
   template: `
+    Error
     <button (click)="run()">Run</button>
   `
 })
-export class CamelComponent {
+export class ErrorComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("camel").subscribe();
+    this.http.get("error").subscribe();
   }
 }

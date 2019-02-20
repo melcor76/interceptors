@@ -3,13 +3,14 @@ import { HttpClient } from "@angular/common/http";
 
 @Component({
   template: `
+    Camel
     <button (click)="run()">Run</button>
   `
 })
-export class FakeComponent {
+export class CamelComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("fake").subscribe();
+    this.http.get("camel").subscribe();
   }
 }

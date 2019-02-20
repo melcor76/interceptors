@@ -12,15 +12,15 @@ import { camelCase, mapKeys } from "lodash";
 @Injectable()
 export class CamelInterceptor implements HttpInterceptor {
   intercept(
-    request: HttpRequest<any>,
+    req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes("camel")) {
-      return next.handle(request);
+    if (!req.url.includes("camel")) {
+      return next.handle(req);
     }
     console.log("CamelInterceptor");
 
-    return next.handle(request).pipe(
+    return next.handle(req).pipe(
       map(obj => {
         let snakeCaseObject = { Test: "test", AftenPpt: 23 };
         let camelCaseObject = mapKeys(snakeCaseObject, (v, k) => camelCase(k));

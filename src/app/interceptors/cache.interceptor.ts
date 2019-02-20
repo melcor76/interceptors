@@ -14,27 +14,27 @@ export class CacheInterceptor implements HttpInterceptor {
   private cache = new Map<string, any>();
 
   intercept(
-    request: HttpRequest<any>,
+    req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes("cache")) {
-      return next.handle(request);
+    if (!req.url.includes("cache")) {
+      return next.handle(req);
     }
     console.log("CacheInterceptor");
 
-    if (request.method !== "GET") {
-      return next.handle(request);
+    if (req.method !== "GET") {
+      return next.handle(req);
     }
 
-    const cachedResponse = this.cache.get(request.url);
+    const cachedResponse = this.cache.get(req.url);
     if (cachedResponse) {
       return of(cachedResponse);
     }
 
-    return next.handle(request).pipe(
+    return next.handle(req).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {
-          this.cache.set(request.url, event);
+          this.cache.set(req.url, event);
         }
       })
     );

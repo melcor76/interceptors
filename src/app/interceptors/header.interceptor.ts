@@ -10,15 +10,15 @@ import { Observable } from "rxjs";
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
   intercept(
-    request: HttpRequest<any>,
+    req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!request.url.includes("header")) {
-      return next.handle(request);
+    if (!req.url.includes("header")) {
+      return next.handle(req);
     }
     console.log("HeaderInterceptor");
 
-    const modified = request.clone({ setHeaders: { "X-Man": "Wolverine" } });
+    const modified = req.clone({ setHeaders: { "X-Man": "Wolverine" } });
 
     return next.handle(modified);
   }
