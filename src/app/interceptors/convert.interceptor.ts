@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
-  HttpInterceptor
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { camelCase, mapKeys } from 'lodash';
-import { paths } from '../const';
+  HttpInterceptor,
+  HttpResponse
+} from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { camelCase, mapKeys } from "lodash";
+import { paths } from "../const";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class ConvertInterceptor implements HttpInterceptor {
@@ -16,18 +17,19 @@ export class ConvertInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.convert)) {
+    if (!req.url.includes("comments")) {
       return next.handle(req);
     }
-    console.log('ConvertInterceptor');
+    console.log("ConvertInterceptor");
 
     return next.handle(req).pipe(
-      map(obj => {
-        let snakeCaseObject = { Test: 'test', AftenPpt: 23 };
-        let camelCaseObject = mapKeys(snakeCaseObject, (v, k) => camelCase(k));
-        console.log(snakeCaseObject);
-        console.log(camelCaseObject);
-        return camelCaseObject;
+      map((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          let camelCaseObject = mapKeys(event.body, (v, k) => camelCase(k));
+          const modEvent = event.clone({ body: camelCaseObject });
+
+          return modEvent;
+        }
       })
     );
   }

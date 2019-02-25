@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { paths } from '../const';
+import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { paths } from "../const";
 
 @Component({
   template: `
-    Error
     <button (click)="run()">Run</button>
   `
 })

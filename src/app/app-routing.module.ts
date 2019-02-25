@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './components/auth.component';
-import { CacheComponent } from './components/cache.component';
-import { ConvertComponent } from './components/convert.component';
-import { NotifyComponent } from './components/notify.component';
-import { ErrorComponent } from './components/error.component';
-import { FakeComponent } from './components/fake.component';
-import { HeaderComponent } from './components/header.component';
-import { LoaderComponent } from './components/loader.component';
-import { ProfilerComponent } from './components/profiler.component';
-import { CommonModule } from '@angular/common';
-import { HttpsComponent } from './components/https.component';
-import { paths } from './const';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { AuthComponent } from "./components/auth.component";
+import { CacheComponent } from "./components/cache.component";
+import { ConvertComponent } from "./components/convert.component";
+import { NotifyComponent } from "./components/notify.component";
+import { ErrorComponent } from "./components/error.component";
+import { FakeComponent } from "./components/fake.component";
+import { HeaderComponent } from "./components/header.component";
+import { LoaderComponent } from "./components/loader.component";
+import { ProfilerComponent } from "./components/profiler.component";
+import { CommonModule } from "@angular/common";
+import { HttpsComponent } from "./components/https.component";
+import { paths } from "./const";
+import { MatButtonModule } from "@angular/material/button";
 
 const routes: Routes = [
   { path: paths.auth, component: AuthComponent },
@@ -39,7 +40,7 @@ const routes: Routes = [
     NotifyComponent,
     ProfilerComponent
   ],
-  imports: [CommonModule, RouterModule.forRoot(routes)],
+  imports: [CommonModule, MatButtonModule, RouterModule.forRoot(routes)],
   exports: [
     AuthComponent,
     CacheComponent,
