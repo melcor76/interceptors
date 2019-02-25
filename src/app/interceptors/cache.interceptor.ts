@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
   HttpResponse
-} from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { tap } from "rxjs/operators";
+} from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { paths } from '../const';
 
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
@@ -17,12 +18,12 @@ export class CacheInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("cache")) {
+    if (!req.url.includes(paths.cache)) {
       return next.handle(req);
     }
-    console.log("CacheInterceptor");
+    console.log('CacheInterceptor');
 
-    if (req.method !== "GET") {
+    if (req.method !== 'GET') {
       return next.handle(req);
     }
 

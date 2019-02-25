@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { paths } from '../const';
 
 @Component({
   template: `
@@ -11,6 +12,6 @@ export class CacheComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("cache").subscribe();
+    this.http.get(paths.cache).subscribe();
   }
 }

@@ -1,55 +1,56 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AuthComponent } from "./components/auth.component";
-import { CacheComponent } from "./components/cache.component";
-import { CamelComponent } from "./components/camel.component";
-import { ToastrComponent } from "./components/toastr.component";
-import { ErrorComponent } from "./components/error.component";
-import { FakeComponent } from "./components/fake.component";
-import { HeaderComponent } from "./components/header.component";
-import { LoaderComponent } from "./components/loader.component";
-import { ProfilerComponent } from "./components/profiler.component";
-import { CommonModule } from "@angular/common";
-import { HttpsComponent } from "./components/https.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthComponent } from './components/auth.component';
+import { CacheComponent } from './components/cache.component';
+import { ConvertComponent } from './components/convert.component';
+import { NotifyComponent } from './components/notify.component';
+import { ErrorComponent } from './components/error.component';
+import { FakeComponent } from './components/fake.component';
+import { HeaderComponent } from './components/header.component';
+import { LoaderComponent } from './components/loader.component';
+import { ProfilerComponent } from './components/profiler.component';
+import { CommonModule } from '@angular/common';
+import { HttpsComponent } from './components/https.component';
+import { paths } from './const';
 
 const routes: Routes = [
-  { path: "auth", component: AuthComponent },
-  { path: "cache", component: CacheComponent },
-  { path: "camel", component: CamelComponent },
-  { path: "error", component: ErrorComponent },
-  { path: "fake", component: FakeComponent },
-  { path: "header", component: HeaderComponent },
-  { path: "https", component: HttpsComponent },
-  { path: "loader", component: LoaderComponent },
-  { path: "profiler", component: ProfilerComponent },
-  { path: "toastr", component: ToastrComponent }
+  { path: paths.auth, component: AuthComponent },
+  { path: paths.cache, component: CacheComponent },
+  { path: paths.convert, component: ConvertComponent },
+  { path: paths.error, component: ErrorComponent },
+  { path: paths.fake, component: FakeComponent },
+  { path: paths.header, component: HeaderComponent },
+  { path: paths.https, component: HttpsComponent },
+  { path: paths.loader, component: LoaderComponent },
+  { path: paths.profiler, component: ProfilerComponent },
+  { path: paths.notify, component: NotifyComponent }
 ];
 
 @NgModule({
   declarations: [
     AuthComponent,
     CacheComponent,
-    CamelComponent,
+    ConvertComponent,
     ErrorComponent,
     FakeComponent,
     HeaderComponent,
     HttpsComponent,
     LoaderComponent,
-    ProfilerComponent,
-    ToastrComponent
+    NotifyComponent,
+    ProfilerComponent
   ],
   imports: [CommonModule, RouterModule.forRoot(routes)],
   exports: [
     AuthComponent,
     CacheComponent,
-    CamelComponent,
+    ConvertComponent,
     ErrorComponent,
     FakeComponent,
     HeaderComponent,
     HttpsComponent,
     LoaderComponent,
+    NotifyComponent,
     ProfilerComponent,
-    ToastrComponent,
     RouterModule
   ]
 })

@@ -1,34 +1,9 @@
-<mat-grid-list cols="5" rowHeight="2:1">
-  <mat-grid-tile>
-    <a [routerLink]="['https']">10</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['loader']">9</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['header']">8</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['profiler']">7</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['camel']">6</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['cache']">5</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['header']">4</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['fake']">3</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['error']">2</a>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <a [routerLink]="['auth']">1</a>
-  </mat-grid-tile>
+<mat-grid-list
+    cols="10"
+    rowHeight="1:1"
+>
+    <mat-grid-tile *ngFor="let item of top10">
+        <a [routerLink]="[item.link]">{{item.position}}</a>
+    </mat-grid-tile>
 </mat-grid-list>
-
 <router-outlet></router-outlet>

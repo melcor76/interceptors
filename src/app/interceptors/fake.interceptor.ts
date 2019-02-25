@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor
-} from "@angular/common/http";
-import { Observable } from "rxjs";
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { paths } from '../const';
 
 @Injectable()
 export class FakeInterceptor implements HttpInterceptor {
@@ -13,10 +14,10 @@ export class FakeInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("fake")) {
+    if (!req.url.includes(paths.fake)) {
       return next.handle(req);
     }
-    console.log("FakeInterceptor");
+    console.log('FakeInterceptor');
 
     return next.handle(req);
   }

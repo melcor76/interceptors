@@ -4,14 +4,14 @@ import { paths } from '../const';
 
 @Component({
   template: `
-    Auth
+    Convert
     <button (click)="run()">Run</button>
   `
 })
-export class AuthComponent {
+export class ConvertComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get(paths.auth).subscribe();
+    this.http.get(paths.convert).subscribe();
   }
 }

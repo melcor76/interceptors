@@ -1,12 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest
-} from "@angular/common/http";
+} from '@angular/common/http';
 
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
+import { paths } from '../const';
 
 @Injectable()
 export class HttpsInterceptor implements HttpInterceptor {
@@ -14,14 +15,14 @@ export class HttpsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("jsonplaceholder")) {
+    if (!req.url.includes(paths.https)) {
       return next.handle(req);
     }
-    console.log("HttpsInterceptor");
+    console.log('HttpsInterceptor');
 
     // clone request and replace 'http://' with 'https://' at the same time
     const https = req.clone({
-      url: req.url.replace("http://", "https://")
+      url: req.url.replace('http://', 'https://')
     });
 
     return next.handle(https);

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpRequest,
@@ -6,27 +6,28 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
   HttpResponse
-} from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-import { ToastrService } from "ngx-toastr";
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { paths } from '../const';
 
 @Injectable()
-export class ToastrInterceptor implements HttpInterceptor {
+export class NotifyInterceptor implements HttpInterceptor {
   constructor(private toastr: ToastrService) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("notification")) {
+    if (!req.url.includes(paths.notify)) {
       return next.handle(req);
     }
-    console.log("ToastrInterceptor");
+    console.log('NotifyInterceptor');
 
     return next.handle(req).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse && event.status === 201) {
-          this.toastr.success("Object created.");
+          this.toastr.success('Object created.');
         }
       }),
       catchError((error: HttpErrorResponse) => {

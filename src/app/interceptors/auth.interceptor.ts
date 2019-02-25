@@ -1,18 +1,19 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
   HttpErrorResponse
-} from "@angular/common/http";
-import { throwError, Observable, BehaviorSubject, of } from "rxjs";
-import { catchError, filter, take, switchMap } from "rxjs/operators";
+} from '@angular/common/http';
+import { throwError, Observable, BehaviorSubject, of } from 'rxjs';
+import { catchError, filter, take, switchMap } from 'rxjs/operators';
+import { paths } from '../const';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private AUTH_HEADER = "Authorization";
-  private token = "secrettoken";
+  private AUTH_HEADER = 'Authorization';
+  private token = 'secrettoken';
   private refreshTokenInProgress = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
     null
@@ -22,10 +23,10 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("auth")) {
+    if (!req.url.includes(paths.auth)) {
       return next.handle(req);
     }
-    console.log("AuthInterceptor");
+    console.log('AuthInterceptor');
     /*if (!req.headers.has('Content-Type')) {
       req = req.clone({
         headers: req.headers.set('Content-Type', 'application/json')
@@ -75,12 +76,12 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private refreshAccessToken(): Observable<any> {
-    return of("secret token");
+    return of('secret token');
   }
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
     return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, "Bearer" + this.token)
+      headers: request.headers.set(this.AUTH_HEADER, 'Bearer' + this.token)
     });
   }
 }

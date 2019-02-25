@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { paths } from '../const';
 
 @Component({
   template: `
@@ -11,6 +12,6 @@ export class ProfilerComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get("profiler").subscribe();
+    this.http.get(paths.profiler).subscribe();
   }
 }
