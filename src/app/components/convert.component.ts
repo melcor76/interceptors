@@ -1,27 +1,34 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { paths } from "../const";
+import { Observable } from "rxjs";
 
 @Component({
   template: `
-    <button mat-raised-button color="primary" (click)="run()">Run</button>
-    <br />Send PascalCase
-    <pre>{{ obj | json }}</pre>
-    Returne camelCase
-    <pre>{{ convertedObj | json }}</pre>
+    <div>
+      <h3>Request</h3>
+      <pre>{{ requestObj | json }}</pre>
+    </div>
+    <div>
+      <h3>Response</h3>
+      <pre>{{ response | async | json }}</pre>
+    </div>
+    <button mat-raised-button color="primary" (click)="request()">
+      Make request
+    </button>
   `
 })
 export class ConvertComponent {
-  obj = {
+  requestObj = {
     Title: "Mr",
-    Name: "Cool Cat"
+    Name: "Cool Cat",
+    Id: 1
   };
-  convertedObj = {};
+  response: Observable<any>;
   constructor(private http: HttpClient) {}
 
-  run() {
-    this.http
-      .put("https://jsonplaceholder.typicode.com/comments/1", this.obj)
-      .subscribe(response => (this.convertedObj = response));
+  request() {
+    const url = "https://jsonplaceholder.typicode.com/comments/1";
+    this.response = this.http.put(url, this.requestObj);
   }
 }

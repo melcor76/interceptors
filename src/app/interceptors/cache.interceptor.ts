@@ -21,6 +21,7 @@ export class CacheInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.cache)) {
       return next.handle(req);
     }
+    console.warn("CacheInterceptor");
 
     if (req.method !== "GET") {
       return next.handle(req);

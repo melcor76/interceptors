@@ -13,7 +13,7 @@ interface topList {
 })
 export class AppComponent implements OnInit {
   top10: topList[] = [];
-  selected: string;
+  selected: number;
 
   ngOnInit(): void {
     const list = Object.keys(paths);

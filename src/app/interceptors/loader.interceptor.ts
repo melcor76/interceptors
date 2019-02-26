@@ -20,6 +20,7 @@ export class LoaderInterceptor implements HttpInterceptor {
     if (!req.url.includes("albums")) {
       return next.handle(req);
     }
+    console.warn("LoaderInterceptor");
 
     const loaderService = this.injector.get(LoaderService);
 

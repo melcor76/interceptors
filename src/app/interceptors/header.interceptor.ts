@@ -17,6 +17,7 @@ export class HeaderInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.header)) {
       return next.handle(req);
     }
+    console.warn("HeaderInterceptor");
 
     const modified = req.clone({ setHeaders: { "X-Man": "Wolverine" } });
 

@@ -20,6 +20,7 @@ export class ConvertInterceptor implements HttpInterceptor {
     if (!req.url.includes("comments")) {
       return next.handle(req);
     }
+    console.warn("ConvertInterceptor");
 
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => {

@@ -22,6 +22,7 @@ export class NotifyInterceptor implements HttpInterceptor {
     if (!req.url.includes("posts")) {
       return next.handle(req);
     }
+    console.warn("NotifyInterceptor");
 
     return next.handle(req).pipe(
       tap((event: HttpEvent<any>) => {

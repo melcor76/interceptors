@@ -1,14 +1,14 @@
 <mat-grid-list cols="10" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let item of top10">
-    <a [routerLink]="[item.path]" (click)="selected = item.path"
+  <mat-grid-tile
+    *ngFor="let item of top10"
+    [ngClass]="selected === item.position ? 'selected' : ''"
+  >
+    <a [routerLink]="[item.path]" (click)="selected = item.position"
       >{{ item.position }}. {{ item.path | titlecase }}</a
     >
   </mat-grid-tile>
 </mat-grid-list>
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>{{ selected | titlecase }}</mat-card-title>
-  </mat-card-header>
   <mat-card-content>
     <router-outlet></router-outlet>
   </mat-card-content>

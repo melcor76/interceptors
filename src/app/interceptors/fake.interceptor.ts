@@ -17,6 +17,7 @@ export class FakeInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.fake)) {
       return next.handle(req);
     }
+    console.warn("FakeInterceptor");
 
     return next.handle(req);
   }

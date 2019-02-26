@@ -22,6 +22,7 @@ export class ProfilerInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.profiler) && !req.url.includes("users")) {
       return next.handle(req);
     }
+    console.warn("ProfilerInterceptor");
 
     const started = Date.now();
     let ok: string;

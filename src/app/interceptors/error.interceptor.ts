@@ -21,6 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.error)) {
       return next.handle(req);
     }
+    console.warn("ErrorInterceptor");
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -31,9 +32,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           // 401 handled in auth.interceptor
           this.toastr.error(error.message);
           return throwError(error);
-        } else {
-          return throwError(error);
         }
+        return throwError(error);
       })
     );
   }

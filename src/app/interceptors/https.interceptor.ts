@@ -16,9 +16,10 @@ export class HttpsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.https) && !req.url.includes("todos")) {
+    if (!req.url.includes("todos")) {
       return next.handle(req);
     }
+    console.warn("HttpsInterceptor");
 
     // clone request and replace 'http://' with 'https://' at the same time
     const httpsReq = req.clone({
