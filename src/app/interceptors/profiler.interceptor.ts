@@ -1,43 +1,51 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
   HttpResponse
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap, finalize } from 'rxjs/operators';
-import { paths } from '../const';
+} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { tap, finalize } from "rxjs/operators";
+import { paths } from "../const";
+import { ProfilerService } from "../services/profiler.service";
 
 @Injectable()
 export class ProfilerInterceptor implements HttpInterceptor {
+  constructor(private profiler: ProfilerService) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.profiler)) {
+    if (!req.url.includes(paths.profiler) && !req.url.includes("users")) {
       return next.handle(req);
     }
-    console.log('ProfilerInterceptor');
+
     const started = Date.now();
-    let ok: string;
 
     return next.handle(req).pipe(
       tap(
         // Succeeds when there is a response; ignore other events
-        event => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
+        event => {
+          if (event instanceof HttpResponse) {
+            const elapsed = Date.now() - started;
+            const msg = `${req.method} "${
+              req.urlWithParams
+            }" succeeded in ${elapsed} ms.`;
+            this.profiler.add(msg);
+          }
+        },
         // Operation failed; error is an HttpErrorResponse
-        error => (ok = 'failed')
-      ),
-      // Log when response observable either completes or errors
-      finalize(() => {
-        const elapsed = Date.now() - started;
-        const msg = `${req.method} "${req.urlWithParams}"
-           ${ok} in ${elapsed} ms.`;
-
-        console.log(msg);
-      })
+        error => {
+          const elapsed = Date.now() - started;
+          const msg = `${req.method} "${
+            req.urlWithParams
+          }" failed in ${elapsed} ms.`;
+          this.profiler.add(msg);
+        }
+      )
     );
   }
 }

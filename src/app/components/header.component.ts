@@ -4,7 +4,7 @@ import { paths } from "../const";
 
 @Component({
   template: `
-    <button (click)="run()">Run</button>
+    <button mat-raised-button color="primary" (click)="run()">Run</button>
   `
 })
 export class HeaderComponent {

@@ -4,7 +4,7 @@ import { paths } from "../const";
 
 @Component({
   template: `
-    <button mat-raised-button (click)="run()">Run</button>
+    <button mat-raised-button color="primary" (click)="run()">Run</button>
     <br />Send PascalCase
     <pre>{{ obj | json }}</pre>
     Returne camelCase
