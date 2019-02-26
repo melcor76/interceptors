@@ -17,7 +17,7 @@ export class LoaderInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.loader)) {
+    if (!req.url.includes("albums")) {
       return next.handle(req);
     }
 
@@ -25,12 +25,6 @@ export class LoaderInterceptor implements HttpInterceptor {
 
     loaderService.show();
 
-    return next.handle(req).pipe(
-      finalize(() => {
-        setTimeout(() => {
-          loaderService.hide();
-        }, 3000);
-      })
-    );
+    return next.handle(req).pipe(finalize(() => loaderService.hide()));
   }
 }

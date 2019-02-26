@@ -21,6 +21,6 @@ export class LoaderComponent {
   constructor(private http: HttpClient, public loaderService: LoaderService) {}
 
   run() {
-    this.http.get(paths.loader).subscribe();
+    this.http.get("https://jsonplaceholder.typicode.com/albums").subscribe();
   }
 }

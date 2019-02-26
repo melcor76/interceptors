@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { paths } from '../const';
+} from "@angular/common/http";
+import { Observable } from "rxjs";
+import { paths } from "../const";
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -17,9 +17,8 @@ export class HeaderInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.header)) {
       return next.handle(req);
     }
-    console.log('HeaderInterceptor');
 
-    const modified = req.clone({ setHeaders: { 'X-Man': 'Wolverine' } });
+    const modified = req.clone({ setHeaders: { "X-Man": "Wolverine" } });
 
     return next.handle(modified);
   }

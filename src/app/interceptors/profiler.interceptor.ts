@@ -8,8 +8,8 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { tap, finalize } from "rxjs/operators";
-import { paths } from "../const";
 import { ProfilerService } from "../services/profiler.service";
+import { paths } from "../const";
 
 @Injectable()
 export class ProfilerInterceptor implements HttpInterceptor {
@@ -24,28 +24,26 @@ export class ProfilerInterceptor implements HttpInterceptor {
     }
 
     const started = Date.now();
+    let ok: string;
 
     return next.handle(req).pipe(
       tap(
         // Succeeds when there is a response; ignore other events
-        event => {
+        (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            const elapsed = Date.now() - started;
-            const msg = `${req.method} "${
-              req.urlWithParams
-            }" succeeded in ${elapsed} ms.`;
-            this.profiler.add(msg);
+            ok = "succeeded";
           }
         },
         // Operation failed; error is an HttpErrorResponse
-        error => {
-          const elapsed = Date.now() - started;
-          const msg = `${req.method} "${
-            req.urlWithParams
-          }" failed in ${elapsed} ms.`;
-          this.profiler.add(msg);
-        }
-      )
+        error => (ok = "failed")
+      ),
+      // Log when response observable either completes or errors
+      finalize(() => {
+        const elapsed = Date.now() - started;
+        const msg = `${req.method} "${req.urlWithParams}"
+               ${ok} in ${elapsed} ms.`;
+        this.profiler.add(msg);
+      })
     );
   }
 }

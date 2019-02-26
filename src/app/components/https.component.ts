@@ -4,13 +4,16 @@ import { paths } from "../const";
 
 @Component({
   template: `
-    <button mat-raised-button color="primary" (click)="run()">Run</button>
+    <button mat-raised-button color="primary" (click)="run()">
+      Call {{ url }}
+    </button>
   `
 })
 export class HttpsComponent {
+  url = "http://jsonplaceholder.typicode.com/todos/1";
   constructor(private http: HttpClient) {}
 
   run() {
-    this.http.get(paths.https).subscribe();
+    this.http.get(this.url).subscribe();
   }
 }

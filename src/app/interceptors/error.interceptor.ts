@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   HttpEvent,
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
   HttpErrorResponse
-} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { paths } from '../const';
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { catchError, retry } from "rxjs/operators";
+import { ToastrService } from "ngx-toastr";
+import { paths } from "../const";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -21,7 +21,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     if (!req.url.includes(paths.error)) {
       return next.handle(req);
     }
-    console.log('ErrorInterceptor');
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {

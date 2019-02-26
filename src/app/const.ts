@@ -4,9 +4,9 @@ export const paths = {
   fake: "fake",
   error: "error",
   profiler: "profiler",
-  convert: "convert",
-  header: "header",
   notify: "notify",
+  header: "header",
+  convert: "convert",
   loader: "loader",
   https: "https"
 };

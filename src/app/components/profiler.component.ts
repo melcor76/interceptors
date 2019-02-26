@@ -10,34 +10,16 @@ import { finalize } from "rxjs/operators";
       Succeed
     </button>
     <button mat-raised-button color="warn" (click)="fail()">Fail</button>
-    <div *ngFor="let log of logs">{{ log }}</div>
   `
 })
 export class ProfilerComponent {
-  logs: string[] = [];
-  constructor(private http: HttpClient, private profiler: ProfilerService) {
-    this.logs = this.profiler.logs;
-  }
+  constructor(private http: HttpClient) {}
 
   succeed() {
-    this.http
-      .get("https://jsonplaceholder.typicode.com/users/1")
-      .pipe(
-        finalize(() => {
-          this.logs = this.profiler.logs;
-        })
-      )
-      .subscribe();
+    this.http.get("https://jsonplaceholder.typicode.com/users/1").subscribe();
   }
 
   fail() {
-    this.http
-      .get(paths.profiler)
-      .pipe(
-        finalize(() => {
-          this.logs = this.profiler.logs;
-        })
-      )
-      .subscribe();
+    this.http.get(paths.profiler).subscribe();
   }
 }
