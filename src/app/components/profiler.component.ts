@@ -1,11 +1,12 @@
-import { ProfilerService } from "./../services/profiler.service";
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { paths } from "../const";
-import { finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Component({
   template: `
+    <h3>Response</h3>
+    <pre>{{ response | async | json }}</pre>
     <button mat-raised-button color="primary" (click)="succeed()">
       Succeed
     </button>
@@ -13,13 +14,16 @@ import { finalize } from "rxjs/operators";
   `
 })
 export class ProfilerComponent {
+  response: Observable<any>;
+
   constructor(private http: HttpClient) {}
 
   succeed() {
-    this.http.get("https://jsonplaceholder.typicode.com/users/1").subscribe();
+    const url = "https://jsonplaceholder.typicode.com/users/1";
+    this.response = this.http.get(url);
   }
 
   fail() {
-    this.http.get(paths.profiler).subscribe();
+    this.response = this.http.get(paths.profiler);
   }
 }

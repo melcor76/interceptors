@@ -6,9 +6,8 @@ import {
   HttpInterceptor
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { finalize } from "rxjs/operators";
+import { finalize, delay } from "rxjs/operators";
 import { LoaderService } from "../services/loader.service";
-import { paths } from "../const";
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -26,6 +25,9 @@ export class LoaderInterceptor implements HttpInterceptor {
 
     loaderService.show();
 
-    return next.handle(req).pipe(finalize(() => loaderService.hide()));
+    return next.handle(req).pipe(
+      delay(5000),
+      finalize(() => loaderService.hide())
+    );
   }
 }

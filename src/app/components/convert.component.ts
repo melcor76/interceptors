@@ -13,8 +13,8 @@ import { Observable } from "rxjs";
       <h3>Response</h3>
       <pre>{{ response | async | json }}</pre>
     </div>
-    <button mat-raised-button color="primary" (click)="request()">
-      Make request
+    <button mat-raised-button color="primary" (click)="run()">
+      Run
     </button>
   `
 })
@@ -27,7 +27,7 @@ export class ConvertComponent {
   response: Observable<any>;
   constructor(private http: HttpClient) {}
 
-  request() {
+  run() {
     const url = "https://jsonplaceholder.typicode.com/comments/1";
     this.response = this.http.put(url, this.requestObj);
   }
