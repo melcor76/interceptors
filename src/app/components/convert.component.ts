@@ -1,17 +1,18 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { paths } from "../const";
 import { Observable } from "rxjs";
 
 @Component({
   template: `
-    <div>
-      <h3>Request</h3>
-      <pre>{{ requestObj | json }}</pre>
-    </div>
-    <div>
-      <h3>Response</h3>
-      <pre>{{ response | async | json }}</pre>
+    <div style="display: flex;">
+      <div class="flex: 50%">
+        <h3>Request</h3>
+        <pre>{{ requestObj | json }}</pre>
+      </div>
+      <div class="flex: 50%">
+        <h3>Response</h3>
+        <pre>{{ response | async | json }}</pre>
+      </div>
     </div>
     <button mat-raised-button color="primary" (click)="run()">
       Run

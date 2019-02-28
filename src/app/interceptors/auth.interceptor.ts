@@ -27,13 +27,13 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
     console.warn("AuthInterceptor");
-    /*if (!req.headers.has('Content-Type')) {
+    if (!req.headers.has("Content-Type")) {
       req = req.clone({
-        headers: req.headers.set('Content-Type', 'application/json')
+        headers: req.headers.set("Content-Type", "application/json")
       });
-    }*/
+    }
 
-    //req = this.addAuthenticationToken(req);
+    req = this.addAuthenticationToken(req);
 
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
