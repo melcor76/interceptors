@@ -18,7 +18,7 @@ export class CacheInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.cache)) {
+    if (!req.url.includes("todos/2")) {
       return next.handle(req);
     }
     console.warn("CacheInterceptor");

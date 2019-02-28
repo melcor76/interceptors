@@ -3,12 +3,10 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
-  HttpRequest,
-  HttpResponse
+  HttpRequest
 } from "@angular/common/http";
 
 import { Observable, of } from "rxjs";
-import { paths } from "../const";
 
 @Injectable()
 export class HttpsInterceptor implements HttpInterceptor {
@@ -16,7 +14,7 @@ export class HttpsInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes("todos")) {
+    if (!req.url.includes("todos/1")) {
       return next.handle(req);
     }
     console.warn("HttpsInterceptor");
