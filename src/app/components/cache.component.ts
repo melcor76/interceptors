@@ -16,7 +16,7 @@ export class CacheComponent {
   constructor(private http: HttpClient) {}
 
   run() {
-    const url = "http://jsonplaceholder.typicode.com/todos/2";
+    const url = "https://jsonplaceholder.typicode.com/todos/2";
     this.response = this.http.get(url);
   }
 
