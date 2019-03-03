@@ -24,14 +24,11 @@ export class ErrorInterceptor implements HttpInterceptor {
     console.warn("ErrorInterceptor");
 
     return next.handle(req).pipe(
+      retry(2),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 508) {
-          // Retry on network errors or timeouts
-          retry(2);
-        } else if (error.status !== 401) {
+        if (error.status !== 401) {
           // 401 handled in auth.interceptor
           this.toastr.error(error.message);
-          return throwError(error);
         }
         return throwError(error);
       })
