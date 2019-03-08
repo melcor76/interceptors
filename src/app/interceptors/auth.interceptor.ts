@@ -80,8 +80,17 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private addAuthenticationToken(request: HttpRequest<any>): HttpRequest<any> {
+    // If we do not have a token yet then we should not set the header.
+    // Here we could first retrieve the token from where we store it.
+    if (!this.token) {
+      return request;
+    }
+    // If you are calling an outside domain then do not add the token.
+    if (!request.url.match(/www.mydomain.com\//)) {
+      return request;
+    }
     return request.clone({
-      headers: request.headers.set(this.AUTH_HEADER, "Bearer" + this.token)
+      headers: request.headers.set(this.AUTH_HEADER, "Bearer " + this.token)
     });
   }
 }
