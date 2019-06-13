@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { LoaderService } from "../services/loader.service";
-import { load } from "@angular/core/src/render3";
 
 @Component({
   styleUrls: ["loader.component.css"],

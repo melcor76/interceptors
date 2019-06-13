@@ -7,7 +7,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { throwError, Observable, BehaviorSubject, of } from "rxjs";
-import { catchError, filter, take, switchMap } from "rxjs/operators";
+import { catchError, filter, finalize, take, switchMap } from "rxjs/operators";
 import { paths } from "../const";
 
 @Injectable()
@@ -54,13 +54,13 @@ export class AuthInterceptor implements HttpInterceptor {
             this.refreshTokenSubject.next(null);
 
             return this.refreshAccessToken().pipe(
-              switchMap((success: boolean) => {               
+              switchMap((success: boolean) => {
                 this.refreshTokenSubject.next(success);
                 return next.handle(this.addAuthenticationToken(req));
               }),
               // When the call to refreshToken completes we reset the refreshTokenInProgress to false
               // for the next time the token needs to be refreshed
-              finalize(() => this.refreshTokenInProgress = false)
+              finalize(() => (this.refreshTokenInProgress = false))
             );
           }
         } else {
