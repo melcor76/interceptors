@@ -23,7 +23,7 @@
     "@angular/router": "~8.0.0",
     "core-js": "2.6.9",
     "hammerjs": "^2.0.8",
-    "lodash": "4.17.11",
+    "lodash": "4.17.21",
     "ngx-toastr": "10.0.4",
     "rxjs": "~6.5.2",
     "tslib": "1.10.0",
